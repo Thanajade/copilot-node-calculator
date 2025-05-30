@@ -93,15 +93,12 @@ describe('Arithmetic', function () {
         });
     });
 
-// TODO: Challenge #1
- 
-
-    describe('Multiplication', function () {
-        it('multiplies two positive integers', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=21&operand2=2')
+    describe('Subtraction', function () {
+        it('subtracts two positive integers', function (done) {
+            request.get('/arithmetic?operation=subtract&operand1=42&operand2=21')
                 .expect(200)
                 .end(function (err, res) {
-                    expect(res.body).to.eql({ result: 42 });
+                    expect(res.body).to.eql({ result: 21 });
                     done();
                 });
         });
@@ -142,6 +139,37 @@ describe('Arithmetic', function () {
                 .expect(200)
                 .end(function (err, res) {
                     expect(res.body).to.eql({ result: 42 });
+                    done();
+                });
+        });
+    });
+
+    describe('Power', function () {
+        it('raises a positive integer to a positive integer exponent', function (done) {
+            request.get('/arithmetic?operation=power&operand1=2&operand2=3')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 8 });
+                    done();
+                });
+        })
+    });
+
+    describe('Binary Conversion', function () {
+        it('converts decimal to binary', function (done) {
+            request.get('/arithmetic?operation=toBinary&operand1=42')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: "101010" });
+                    done();
+                });
+        });
+
+        it('converts binary to decimal', function (done) {
+            request.get('/arithmetic?operation=toDecimal&operand1=101010')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: "42" });
                     done();
                 });
         });

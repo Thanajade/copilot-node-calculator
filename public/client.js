@@ -17,21 +17,30 @@ var operand2 = 0;
 var operation = null;
 
 function calculate(operand1, operand2, operation) {
-    var uri = location.origin + "/arithmetic";
+    var uri = location.origin + "/arithmetic?operation=";
 
     // TODO: Add operator
     switch (operation) {
         case '+':
-            uri += "?operation=add";
+            uri += "add";
             break;
         case '-':
-            uri += "?operation=subtract";
+            uri += "subtract";
             break;
         case '*':
-            uri += "?operation=multiply";
+            uri += "multiply";
             break;
         case '/':
-            uri += "?operation=divide";
+            uri += "divide";
+            break;
+        case '^':
+            uri += "power";
+            break;
+        case 'bin':
+            uri += "toBinary";
+            break;
+        case 'dec':
+            uri += "toDecimal";
             break;
         default:
             setError();
@@ -39,7 +48,10 @@ function calculate(operand1, operand2, operation) {
     }
 
     uri += "&operand1=" + encodeURIComponent(operand1);
-    uri += "&operand2=" + encodeURIComponent(operand2);
+    // Only add operand2 for non-conversion operations
+    if (!['bin', 'dec'].includes(operation)) {
+        uri += "&operand2=" + encodeURIComponent(operand2);
+    }
 
     setLoading(true);
 
@@ -111,9 +123,16 @@ function signPressed() {
 }
 
 function operationPressed(op) {
-    operand1 = getValue();
-    operation = op;
-    state = states.operator;
+    if (op === 'bin' || op === 'dec') {
+        // For binary conversion, immediately calculate with current value
+        operand1 = getValue();
+        calculate(operand1, null, op);
+        state = states.complete;
+    } else {
+        operand1 = getValue();
+        operation = op;
+        state = states.operator;
+    }
 }
 
 function equalPressed() {

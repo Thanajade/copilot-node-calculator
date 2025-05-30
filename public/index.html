@@ -1,8 +1,11 @@
 <html>
   <head>
     <title>Calculator</title>
-    <link rel="stylesheet" href="default.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="default.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <script src="client.js"></script>
   </head>
   <body onLoad="setValue(0)">
@@ -11,7 +14,7 @@
         <div id="result"><span class="digit0">0</span></div>
       </div>
 
-      <div id="loading" style="visibility:hidden"></div>
+      <div id="loading" style="visibility: hidden"></div>
 
       <div class="box">
         <div class="calculator">
@@ -23,7 +26,9 @@
             <button class="btn" onClick="numberPressed(7)">7</button>
             <button class="btn" onClick="numberPressed(8)">8</button>
             <button class="btn" onClick="numberPressed(9)">9</button>
-            <button class="btn" onClick="operationPressed('/')">&divide;</button>
+            <button class="btn" onClick="operationPressed('/')">
+              &divide;
+            </button>
 
             <button class="btn" onClick="numberPressed(4)">4</button>
             <button class="btn" onClick="numberPressed(5)">5</button>
@@ -41,6 +46,12 @@
             <button class="btn" onClick="equalPressed()">=</button>
 
             <!-- TODO: Buttons -->
+            <!-- add a button for a power (or exponential) function -->
+            <button class="btn" onClick="operationPressed('^')">^</button>
+
+            <!-- Binary conversion buttons -->
+            <button class="btn" onClick="operationPressed('bin')">BIN</button>
+            <button class="btn" onClick="operationPressed('dec')">DEC</button>
           </div>
         </div>
       </div>
